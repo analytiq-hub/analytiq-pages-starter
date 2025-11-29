@@ -193,33 +193,25 @@ You can customize the theme without modifying it:
 
 The starter includes a GitHub Actions workflow (`.github/workflows/pages.yml`) for automatic deployment:
 
-```
-┌─────────────┐
-│   Push to   │
-│   GitHub    │
-│   (main)    │
-└──────┬──────┘
-       │
-       ↓
-┌─────────────┐
-│   GitHub    │
-│   Actions   │
-└──────┬──────┘
-       │
-       ├─→ Checkout code
-       ├─→ Setup Ruby 3.2
-       ├─→ Bundle install (downloads theme v0.1.8)
-       ├─→ Configure Pages
-       ├─→ Jekyll build (production)
-       ├─→ Upload artifact
-       └─→ Deploy to GitHub Pages
-              │
-              ↓
-       ┌─────────────┐
-       │   GitHub    │
-       │    Pages    │
-       └─────────────┘
-```
+<div class="flex justify-center" style="margin: 2rem 0 -10rem 0;">
+  <div style="transform: scale(0.7); transform-origin: top center; display: inline-block;">
+    <div class="excalidraw-static" data-excalidraw="{{ '/assets/excalidraw/github-pages-deployment.excalidraw' | relative_url }}" style="margin: 0;">
+      <div class="loading" style="padding: 2rem; text-align: center; color: #666;">Loading diagram...</div>
+    </div>
+  </div>
+</div>
+{% unless page.excalidraw_renderer_loaded %}
+  <script type="module" src="{{ '/assets/js/excalidraw/render-excalidraw.js' | relative_url }}" defer></script>
+  {% assign page.excalidraw_renderer_loaded = true %}
+{% endunless %}
+
+<div class="text-sm text-gray-500 mb-6 text-center" style="margin-top: -8rem;">
+  <a href="{{ '/excalidraw-edit' | relative_url }}?file={{ '/assets/excalidraw/github-pages-deployment.excalidraw' | relative_url }}" 
+     class="text-gray-500 hover:text-gray-700 no-underline" 
+     target="_blank">
+    Edit diagram
+  </a>
+</div>
 
 ### Build Process
 
