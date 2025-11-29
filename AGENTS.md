@@ -203,6 +203,14 @@ Blog posts should include a custom SVG splash image that appears at the top of t
 - Ensure text is readable - use white or very light colors
 - Icons should be approximately 200px wide/tall and centered
 
+**For detailed styling alternatives and techniques**, see `SVG_STYLING_GUIDE.md` which includes:
+- Background styling options (gradients, patterns, solid colors)
+- Icon/illustration styling techniques (glassmorphism, neumorphism, line art, etc.)
+- Text styling alternatives (shadows, gradients, outlines)
+- Color scheme combinations
+- Layout variations
+- Quick reference templates
+
 ### Excalidraw Diagrams
 
 Excalidraw diagrams are ideal for:

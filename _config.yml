@@ -137,6 +137,7 @@ theme: analytiq-pages-theme
 exclude:
   - AGENTS.md
   - CLAUDE.md
+  - SVG_STYLING_GUIDE.md
   - README.md
   - Gemfile
   - Gemfile.lock
