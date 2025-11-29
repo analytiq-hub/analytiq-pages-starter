@@ -9,10 +9,13 @@ This comprehensive guide covers customization and content management for your An
 ## Table of Contents
 
 - [Site Configuration](#site-configuration)
+- [Local Development](#local-development)
+- [Project Structure](#project-structure)
 - [Adding Pages](#adding-pages)
 - [Managing Blog Posts](#managing-blog-posts)
 - [Customizing Navigation](#customizing-navigation)
 - [Working with Assets](#working-with-assets)
+- [Deployment](#deployment)
 - [Customization Options](#customization-options)
 
 ## Site Configuration
@@ -44,6 +47,16 @@ social_links:
   linkedin: yourcompany
 ```
 
+### Update Repository URL
+
+Set your GitHub repository URL in `_config.yml`:
+
+```yaml
+repository: yourusername/your-repo-name
+```
+
+This is used for generating edit links and other GitHub-related features.
+
 ### Footer Sitemap
 
 Configure the footer navigation:
@@ -58,23 +71,132 @@ site_map:
         url: "/features"
 ```
 
+## Local Development
+
+### Prerequisites
+
+Before you can run the site locally, make sure you have the following installed:
+
+- **Ruby** 3.2 or later ([Install Ruby](https://www.ruby-lang.org/en/documentation/installation/))
+- **Bundler** gem (`gem install bundler`)
+- **Git** for version control
+- **Make** (optional but recommended - see installation instructions below)
+
+**Verify your installation:**
+```bash
+ruby --version  # Should be 3.2 or later
+bundle --version
+git --version
+make --version
+```
+
+### Installing Dependencies
+
+Once prerequisites are installed, install the project dependencies:
+
+1. **Install Ruby dependencies**:
+   ```bash
+   bundle install
+   ```
+   This installs Jekyll and all required gems specified in the `Gemfile`.
+
+2. **Install Make (optional but recommended)**:
+   
+   Make is a build automation tool that simplifies running common commands. It's usually pre-installed on Linux and macOS, but you may need to install it on Windows.
+   
+   **Linux (Ubuntu/Debian):**
+   ```bash
+   sudo apt-get install make
+   ```
+   
+   **macOS:**
+   Make is pre-installed. If you need to update it, install via Homebrew:
+   ```bash
+   brew install make
+   ```
+   
+   **Windows:**
+   - Install via [Chocolatey](https://chocolatey.org/): `choco install make`
+   - Or use [GnuWin32](http://gnuwin32.sourceforge.net/packages/make.htm)
+   - Or use WSL (Windows Subsystem for Linux) which includes make
+
+### Starting the Server
+
+Once dependencies are installed, use one of these methods:
+
+**Using Make (recommended):**
+```bash
+make serve
+```
+
+**Using Bundler directly:**
+```bash
+bundle exec jekyll serve
+```
+
+**With live reload:**
+```bash
+bundle exec jekyll serve --livereload
+```
+
+The site will be available at **http://localhost:4000**
+
+### Building for Production
+
+To build the site without running a server:
+
+```bash
+bundle exec jekyll build
+```
+
+The generated site will be in the `_site/` directory.
+
+### Other Useful Commands
+
+```bash
+# Clean the build directory
+bundle exec jekyll clean
+
+# Build and serve (using Make)
+make build
+make serve
+```
+
+## Project Structure
+
+Understanding the key directories:
+
+```
+analytiq-pages-starter/
+├── _config.yml          # Site configuration
+├── _includes/           # Custom includes (overrides theme)
+├── _posts/              # Blog posts
+├── docs/                # Documentation pages
+├── assets/              # Static assets (images, diagrams)
+│   ├── excalidraw/     # Excalidraw diagram files
+│   └── images/         # Image files
+├── *.md                 # Root-level pages
+└── Gemfile              # Ruby dependencies
+```
+
 ## Adding Pages
 
 ### Creating a New Page
 
-1. Create a markdown file at the root (e.g., `services.md`)
-2. Add front matter:
+1. **Create a new markdown file** at the root (e.g., `services.md`)
 
-```yaml
----
-layout: page
-title: Services
-permalink: /services/
----
-```
+2. **Add front matter**:
+   ```yaml
+   ---
+   layout: page
+   title: Services
+   permalink: /services/
+   ---
+   ```
 
-3. Add your content in Markdown below the front matter
-4. Add navigation link in `_config.yml` under `header_pages`
+3. **Add your content** in Markdown below the front matter
+
+4. **Add to navigation** in `_config.yml` under `header_pages`
 
 ### Page Layouts
 
@@ -105,22 +227,25 @@ permalink: /docs/troubleshooting/
 
 ### Creating a Blog Post
 
-1. Create file in `_posts/` with format: `YYYY-MM-DD-post-title.md`
-2. Include front matter:
+1. **Create a file** in `_posts/` with format: `YYYY-MM-DD-title.md`
 
-```yaml
----
-layout: post
-title: "Your Post Title"
-date: 2025-11-29 10:00:00 -0400
-categories: category1 category2
-author: "Author Name"
-image: /assets/images/blog/image.svg
----
-```
+2. **Add front matter**:
+   ```yaml
+   ---
+   layout: post
+   title: "Your Post Title"
+   date: 2025-11-29 10:00:00 -0400
+   categories: category1 category2
+   author: "Author Name"
+   image: /assets/images/blog/image.svg
+   ---
+   ```
 
-3. Write your content in Markdown
-4. Post will appear on blog page and in RSS feed
+3. **Write your content** in Markdown
+
+4. **Create a splash image** - Blog posts should include a custom SVG splash image. See the SVG Styling Guide in the repository for details on creating splash images.
+
+5. Post will appear on blog page and in RSS feed
 
 ### Post Categories
 
@@ -205,6 +330,31 @@ Embed PDF files using the `jekyll-pdf-embed` plugin:
 ```markdown
 {% pdf "/path/to/document.pdf" %}
 ```
+
+## Deployment
+
+### GitHub Pages (Recommended)
+
+The repository includes a GitHub Actions workflow for automatic deployment:
+
+1. **Push your code** to the `main` branch
+2. **Enable GitHub Pages**:
+   - Go to your repository **Settings** → **Pages**
+   - Under "Source", select **GitHub Actions**
+3. **The workflow will automatically build and deploy** your site
+4. Your site will be live at `https://yourusername.github.io/repo-name/`
+
+The workflow (`.github/workflows/pages.yml`) will:
+- Build your Jekyll site
+- Deploy it to GitHub Pages
+- Run automatically on every push to `main`
+
+### Manual Deployment
+
+You can also deploy manually:
+
+1. Build the site: `bundle exec jekyll build`
+2. Upload the `_site/` directory to your hosting provider
 
 ## Customization Options
 
@@ -334,6 +484,26 @@ image: /assets/images/og-image.png
 
 ## Troubleshooting
 
+### Bundle Install Fails
+
+If you encounter issues installing gems:
+
+```bash
+# Update bundler
+gem update bundler
+
+# Try installing again
+bundle install
+```
+
+### Port Already in Use
+
+If port 4000 is already in use:
+
+```bash
+bundle exec jekyll serve --port 4001
+```
+
 ### Styles Not Applying
 
 - Clear Jekyll cache: `bundle exec jekyll clean`
@@ -345,6 +515,7 @@ image: /assets/images/og-image.png
 - Restart Jekyll server: `bundle exec jekyll serve`
 - Clear browser cache
 - Check for syntax errors in Markdown
+- Check for syntax errors in `_config.yml` (YAML is sensitive to indentation)
 
 ### Navigation Not Showing
 
