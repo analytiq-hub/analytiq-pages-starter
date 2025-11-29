@@ -74,6 +74,8 @@ header_pages:
         url: "/docs/user-guide"
       - title: "API Reference"
         url: "/docs/api-reference"
+      - title: "Architecture"
+        url: "/docs/architecture"
   - title: "Resources"
     url: "#"
     children:
@@ -110,6 +112,8 @@ site_map:
         url: "/docs/user-guide"
       - title: "API Reference"
         url: "/docs/api-reference"
+      - title: "Architecture"
+        url: "/docs/architecture"
   - title: "Resources"
     links:
       - title: "Blog"
