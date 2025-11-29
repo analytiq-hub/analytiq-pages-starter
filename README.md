@@ -135,20 +135,61 @@ This starter uses the [analytiq-pages-theme](https://github.com/analytiq-hub/ana
 
 ## Deployment
 
-### GitHub Pages
+### GitHub Pages (Recommended)
 
-1. Push your repository to GitHub
-2. Go to Settings → Pages
-3. Select your branch (usually `main`)
-4. Your site will be published at `https://yourusername.github.io/repo-name`
+This starter includes a GitHub Actions workflow for automatic deployment to GitHub Pages.
+
+#### Initial Setup
+
+1. **Push to GitHub**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/yourusername/yourrepo.git
+   git push -u origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages** (in the left sidebar)
+   - Under **Source**, select **GitHub Actions**
+   - Click **Save**
+
+3. **Deploy**:
+   - The site will automatically build and deploy when you push to the `main` branch
+   - The workflow is configured in `.github/workflows/pages.yml`
+   - Your site will be available at `https://yourusername.github.io/repo-name`
+
+4. **Monitor Deployment**:
+   - Go to the **Actions** tab in your repository to see build progress
+   - Once the workflow completes, your site will be live
+   - The deployment URL is shown in the workflow output
+
+#### Custom Domain (Optional)
+
+To use a custom domain with GitHub Pages:
+
+1. Add a `CNAME` file to your repository root with your domain:
+   ```
+   www.yourdomain.com
+   ```
+
+2. Configure DNS with your domain provider:
+   - For apex domain (`yourdomain.com`): Add A records pointing to GitHub's IPs
+   - For www subdomain: Add a CNAME record pointing to `yourusername.github.io`
+
+3. In GitHub Settings → Pages, enter your custom domain and enable HTTPS
+
+See [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) for detailed instructions.
 
 ### Other Platforms
 
 This is a standard Jekyll site and can be deployed to:
-- Netlify
-- Vercel
-- CloudFlare Pages
-- Any static hosting service
+- **Netlify**: Connect your GitHub repo and it will auto-deploy
+- **Vercel**: Import your GitHub repo for automatic deployments
+- **CloudFlare Pages**: Connect repository and configure build command: `bundle exec jekyll build`
+- **Any static hosting**: Run `bundle exec jekyll build` and upload the `_site` folder
 
 ## License
 
