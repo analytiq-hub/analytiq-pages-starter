@@ -3,9 +3,18 @@ layout: default
 title: "Your Company - Innovative Solutions"
 ---
 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-12 relative">
+    <!-- Template Site Banner - Badge in top right -->
+    <div class="absolute top-0 right-4 z-10 max-w-xs mb-4">
+        <div class="bg-yellow-50 border border-yellow-400 px-4 py-2.5 rounded-lg shadow-sm">
+            <p class="text-sm text-yellow-700 leading-tight">
+                <strong class="text-yellow-800">Starter Template:</strong> <a href="https://github.com/analytiq-hub/analytiq-pages-starter" class="text-yellow-800 hover:text-yellow-900 font-medium underline">Clone and customize</a> to create your own site.
+            </p>
+        </div>
+    </div>
+    
     <!-- Hero Section -->
-    <header class="text-center md:mb-12 mb-8">
+    <header class="text-center md:mb-12 mb-8 mt-8">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Transform Your Business with <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Innovative Solutions</span></h1>
         <div class="text-xl md:text-2xl text-gray-600 mb-8">
             <p class="mb-4">Empowering businesses with cutting-edge technology and expert guidance</p>
