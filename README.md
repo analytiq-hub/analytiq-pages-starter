@@ -2,6 +2,10 @@
 
 A professional Jekyll-based starter website using the [analytiq-pages-theme](https://github.com/analytiq-hub/analytiq-pages-theme). Perfect for company websites, product pages, and documentation sites.
 
+**👉 [View Live Demo](https://analytiqhub.com/analytiq-pages-starter/)**
+
+**📖 [Theme Documentation](https://github.com/analytiq-hub/analytiq-pages-theme/blob/main/README.md)**
+
 ## Quick Start
 
 Creating a company website requires only two steps:
@@ -40,7 +44,7 @@ This starter template is open source and available under the MIT License.
 ## Support
 
 - [Jekyll Documentation](https://jekyllrb.com/docs/)
-- [Theme Documentation](https://github.com/analytiq-hub/analytiq-pages-theme)
+- [Theme Documentation](https://github.com/analytiq-hub/analytiq-pages-theme/blob/main/README.md)
 - [GitHub Issues](https://github.com/yourusername/yourrepo/issues)
 
 ## Credits
