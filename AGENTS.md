@@ -1,6 +1,16 @@
 # Agent Instructions for Analytiq Pages Starter
 
-This file provides guidance for AI agents (Claude, Cursor, etc.) working with the Analytiq Pages Starter codebase. 
+This file provides guidance for AI agents (Claude, Cursor, etc.) working with the Analytiq Pages Starter codebase.
+
+## Important Notes for Agents
+
+- This is a **static site generator**, not a dynamic web application
+- There are **no REST APIs** - only configuration and template APIs
+- Content is written in **Markdown** with YAML front matter
+- **Liquid** is used for templating, not a programming language
+- Files in `exclude` list are **not processed** by Jekyll
+- The theme is loaded from a **Git repository** (GitHub)
+- All pages are **pre-rendered** at build time, not runtime
 
 ## Project Overview
 
@@ -94,7 +104,54 @@ analytiq-pages-starter/
    ---
    ```
 
-#### Creating SVG Splash Images
+
+### Adding Documentation
+
+1. Create `.md` file in `docs/` directory
+2. Use `layout: docs` in front matter
+3. Add link to `_includes/docs-widget.html` navigation
+
+### Embedding Excalidraw Diagrams
+
+```liquid
+{% include excalidraw-static.html file="/assets/excalidraw/diagram.excalidraw" %}
+```
+
+Add edit link:
+```liquid
+<div class="text-sm text-gray-500 mt-2 mb-6 text-center">
+  <a href="{{ '/excalidraw-edit' | relative_url }}?file={{ '/assets/excalidraw/diagram.excalidraw' | relative_url }}" 
+     class="text-gray-500 hover:text-gray-700 no-underline" 
+     target="_blank">
+    Edit diagram
+  </a>
+</div>
+```
+
+## Creating SVG and Excalidraw Diagrams
+
+### SVG Diagrams
+
+SVG diagrams are ideal for:
+- **Blog post splash images** (see "Creating SVG Splash Images" below)
+- **Simple illustrations** embedded in content
+- **Icons and graphics** that need to scale perfectly
+
+**Best Practices for SVG Diagrams**:
+
+1. **Use semantic structure**: Group related elements with `<g>` tags
+2. **Define reusable elements**: Use `<defs>` for gradients, patterns, and markers
+3. **Optimize for size**: Remove unnecessary attributes, use minimal paths
+4. **Ensure accessibility**: Add `<title>` and `<desc>` elements for screen readers
+5. **Use relative units**: Prefer `viewBox` over fixed pixel dimensions when possible
+6. **Consistent styling**: Use CSS classes or inline styles consistently
+
+**File Organization**:
+- Blog splash images: `/assets/images/blog/*.svg`
+- Documentation diagrams: `/assets/images/docs/*.svg`
+- General illustrations: `/assets/images/*.svg`
+
+**Creating SVG Splash Images**:
 
 Blog posts should include a custom SVG splash image that appears at the top of the post. Follow these guidelines:
 
@@ -130,7 +187,7 @@ Blog posts should include a custom SVG splash image that appears at the top of t
   <!-- Title -->
   <text x="400" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold"
         fill="white" text-anchor="middle">Post Title</text>
-  
+
   <!-- Subtitle -->
   <text x="400" y="400" font-family="Arial, sans-serif" font-size="22"
         fill="rgba(255,255,255,0.9)" text-anchor="middle">Post Subtitle or Description</text>
@@ -143,73 +200,6 @@ Blog posts should include a custom SVG splash image that appears at the top of t
 - Use brand colors for gradients (purple/blue, green/blue combinations work well)
 - Ensure text is readable - use white or very light colors
 - Icons should be approximately 200px wide/tall and centered
-
-### Adding Documentation
-
-1. Create `.md` file in `docs/` directory
-2. Use `layout: docs` in front matter
-3. Add link to `_includes/docs-widget.html` navigation
-
-### Embedding Excalidraw Diagrams
-
-```liquid
-{% include excalidraw-static.html file="/assets/excalidraw/diagram.excalidraw" %}
-```
-
-Add edit link:
-```liquid
-<div class="text-sm text-gray-500 mt-2 mb-6 text-center">
-  <a href="{{ '/excalidraw-edit' | relative_url }}?file={{ '/assets/excalidraw/diagram.excalidraw' | relative_url }}" 
-     class="text-gray-500 hover:text-gray-700 no-underline" 
-     target="_blank">
-    Edit diagram
-  </a>
-</div>
-```
-
-## Creating SVG and Excalidraw Diagrams
-
-### SVG Diagrams
-
-SVG diagrams are ideal for:
-- **Blog post splash images** (see "Creating SVG Splash Images" above)
-- **Simple illustrations** embedded in content
-- **Icons and graphics** that need to scale perfectly
-
-**Best Practices for SVG Diagrams**:
-
-1. **Use semantic structure**: Group related elements with `<g>` tags
-2. **Define reusable elements**: Use `<defs>` for gradients, patterns, and markers
-3. **Optimize for size**: Remove unnecessary attributes, use minimal paths
-4. **Ensure accessibility**: Add `<title>` and `<desc>` elements for screen readers
-5. **Use relative units**: Prefer `viewBox` over fixed pixel dimensions when possible
-6. **Consistent styling**: Use CSS classes or inline styles consistently
-
-**Example Structure**:
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <defs>
-    <!-- Define gradients, patterns, markers here -->
-    <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#COLOR1;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#COLOR2;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background -->
-  <rect width="800" height="600" fill="url(#myGradient)"/>
-  
-  <!-- Grouped elements -->
-  <g transform="translate(400, 300)">
-    <!-- Your diagram elements -->
-  </g>
-</svg>
-```
-
-**File Organization**:
-- Blog splash images: `/assets/images/blog/*.svg`
-- Documentation diagrams: `/assets/images/docs/*.svg`
-- General illustrations: `/assets/images/*.svg`
 
 ### Excalidraw Diagrams
 
@@ -333,13 +323,58 @@ Visit http://localhost:4000
 - [Architecture](/docs/architecture/) - Technical architecture details
 - [API Reference](/docs/api-reference/) - Configuration and template APIs
 
-## Notes for Agents
+## Quick Reference
 
-- This is a **static site generator**, not a dynamic web application
-- There are **no REST APIs** - only configuration and template APIs
-- Content is written in **Markdown** with YAML front matter
-- **Liquid** is used for templating, not a programming language
-- Files in `exclude` list are **not processed** by Jekyll
-- The theme is loaded from a **Git repository** (GitHub)
-- All pages are **pre-rendered** at build time, not runtime
+### File Structure
+```
+analytiq-pages-starter/
+├── _config.yml              # Site configuration (YAML)
+├── _includes/               # Site-specific includes (overrides theme)
+├── _posts/                  # Blog posts collection
+├── docs/                    # Documentation pages
+├── assets/                  # Static assets
+│   ├── excalidraw/         # Excalidraw diagram files
+│   └── images/             # Image files
+├── .github/workflows/      # GitHub Actions workflows
+├── *.md                     # Root-level pages (index, about, etc.)
+└── Gemfile                  # Ruby dependencies
+```
+
+### Essential Commands
+```bash
+bundle install              # Install dependencies
+bundle exec jekyll serve    # Start local development server
+# Visit http://localhost:4000
+```
+
+### Front Matter Templates
+
+**Basic Page**:
+```yaml
+---
+layout: page
+title: Page Title
+permalink: /page-url/
+---
+```
+
+**Blog Post**:
+```yaml
+---
+layout: post
+title: "Post Title"
+date: 2025-11-29 10:00:00 -0400
+categories: category1 category2
+author: "Author Name"
+image: /assets/images/blog/image.svg
+---
+```
+
+**Documentation Page**:
+```yaml
+---
+layout: docs
+title: "Documentation Title"
+---
+```
 
