@@ -143,6 +143,11 @@ exclude:
   - Gemfile.lock
   - Makefile
   - LICENSE
+  - vendor
+  - .git
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
 
 # Collections
 collections:
