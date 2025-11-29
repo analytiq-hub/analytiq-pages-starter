@@ -104,6 +104,8 @@ analytiq-pages-starter/
    ---
    ```
 
+**Important**: Blog posts must use **today's date** in both the filename and the `date` field in front matter. Do not use future dates or past dates - always use the current date when creating a new blog post.
+
 
 ### Adding Documentation
 
@@ -114,13 +116,13 @@ analytiq-pages-starter/
 ### Embedding Excalidraw Diagrams
 
 ```liquid
-{% include excalidraw-static.html file="/assets/excalidraw/diagram.excalidraw" %}
+&#123;% include excalidraw-static.html file="/assets/excalidraw/diagram.excalidraw" %&#125;
 ```
 
 Add edit link:
 ```liquid
 <div class="text-sm text-gray-500 mt-2 mb-6 text-center">
-  <a href="{{ '/excalidraw-edit' | relative_url }}?file={{ '/assets/excalidraw/diagram.excalidraw' | relative_url }}" 
+  <a href="&#123;&#123; '/excalidraw-edit' | relative_url &#125;&#125;?file=&#123;&#123; '/assets/excalidraw/diagram.excalidraw' | relative_url &#125;&#125;" 
      class="text-gray-500 hover:text-gray-700 no-underline" 
      target="_blank">
     Edit diagram
@@ -247,13 +249,15 @@ Excalidraw diagrams are ideal for:
 
 ### Escaping Liquid Code in Documentation
 
-When documenting Liquid syntax in markdown files, wrap examples in `{% raw %}` tags:
+When documenting Liquid syntax in markdown files, wrap examples in `&#123;% raw %&#125;` tags:
 
 ```liquid
-{% raw %}{{ site.title }}{% endraw %}
+&#123;% raw %&#125;&#123;&#123; site.title &#125;&#125;&#123;% endraw %&#125;
 ```
 
 This prevents Jekyll from processing the Liquid code during build.
+
+**Note**: In this documentation file (AGENTS.md), Liquid syntax examples use HTML entities (`&#123;` for `{` and `&#125;` for `}`) to prevent Jekyll from processing them, since this file is excluded from Jekyll processing.
 
 ### Common Variables
 
@@ -306,8 +310,8 @@ Visit http://localhost:4000
 
 ### Liquid Syntax Errors
 
-- Wrap example code in `{% raw %}` tags
-- Check for unclosed tags: `{% if %}...{% endif %}`
+- Wrap example code in `&#123;% raw %&#125;` tags
+- Check for unclosed tags: `&#123;% if %&#125;...&#123;% endif %&#125;`
 - Verify variable names match front matter
 
 ### Theme Not Loading
