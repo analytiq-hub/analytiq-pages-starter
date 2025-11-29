@@ -153,13 +153,14 @@ This starter includes a GitHub Actions workflow for automatic deployment to GitH
 2. **Enable GitHub Pages**:
    - Go to your repository on GitHub
    - Navigate to **Settings** → **Pages** (in the left sidebar)
-   - Under **Source**, select **GitHub Actions**
-   - Click **Save**
+   - Under **Source**, select **GitHub Actions** (there's no Save button - it's automatic)
 
 3. **Deploy**:
    - The site will automatically build and deploy when you push to the `main` branch
    - The workflow is configured in `.github/workflows/pages.yml`
-   - Your site will be available at `https://yourusername.github.io/repo-name`
+   - For a repository named `mysite` under user `johndoe`: site will be at `https://johndoe.github.io/mysite/`
+   - For organization repositories: site will be at `https://orgname.github.io/repo-name/`
+   - **Note**: If your repository is named `username.github.io`, the site will be at `https://username.github.io/` (no subdirectory)
 
 4. **Monitor Deployment**:
    - Go to the **Actions** tab in your repository to see build progress
