@@ -4,6 +4,10 @@
       <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+    </linearGradient>
   </defs>
 
   <!-- Background -->
@@ -11,30 +15,31 @@
 
   <!-- Icon - Markdown document -->
   <g transform="translate(400, 200)">
-    <!-- Document -->
-    <rect x="-60" y="-50" width="120" height="140" rx="4" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="3"/>
+    <!-- Document with frosted glass effect -->
+    <rect x="-70" y="-60" width="140" height="160" rx="6" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="3"/>
+    <rect x="-70" y="-60" width="140" height="160" rx="6" fill="url(#glassGradient)" opacity="0.3"/>
     
     <!-- Markdown syntax elements -->
-    <!-- Header symbol -->
-    <text x="0" y="-30" font-family="Arial, sans-serif" font-size="32" font-weight="bold"
-          fill="white" text-anchor="middle">#</text>
+    <!-- Header symbol (#) -->
+    <text x="0" y="-35" font-family="Arial, sans-serif" font-size="36" font-weight="bold"
+          fill="white" text-anchor="middle" opacity="0.95">#</text>
     
-    <!-- Bold text -->
-    <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold"
-          fill="white" text-anchor="middle">**Bold**</text>
+    <!-- Bold text with asterisks -->
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="22" font-weight="bold"
+          fill="white" text-anchor="middle" opacity="0.95">**Bold**</text>
     
-    <!-- Italic text -->
-    <text x="0" y="25" font-family="Arial, sans-serif" font-size="20" font-style="italic"
-          fill="white" text-anchor="middle">*Italic*</text>
+    <!-- Italic text with asterisks -->
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="18"
+          fill="white" text-anchor="middle" opacity="0.95">*Italic*</text>
     
-    <!-- Code block -->
-    <rect x="-50" y="40" width="100" height="30" rx="2" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1"/>
-    <text x="0" y="60" font-family="Monaco, monospace" font-size="16"
-          fill="white" text-anchor="middle">code</text>
+    <!-- Code block/field -->
+    <rect x="-55" y="50" width="110" height="28" rx="3" fill="rgba(255,255,255,0.35)" stroke="white" stroke-width="1.5"/>
+    <text x="0" y="68" font-family="Monaco, monospace" font-size="14"
+          fill="white" text-anchor="middle" opacity="0.95">code</text>
     
-    <!-- List item -->
-    <circle cx="-40" cy="85" r="3" fill="white"/>
-    <line x1="-35" y1="85" x2="40" y2="85" stroke="white" stroke-width="2"/>
+    <!-- List item indicator -->
+    <circle cx="-45" cy="95" r="3.5" fill="white" opacity="0.9"/>
+    <line x1="-38" y1="95" x2="45" y2="95" stroke="white" stroke-width="2.5" opacity="0.9"/>
   </g>
 
   <!-- Text -->
