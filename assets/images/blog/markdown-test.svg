@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="markdownGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#markdownGrad)"/>
+
+  <!-- Icon - Markdown document -->
+  <g transform="translate(400, 200)">
+    <!-- Document -->
+    <rect x="-60" y="-50" width="120" height="140" rx="4" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="3"/>
+    
+    <!-- Markdown syntax elements -->
+    <!-- Header symbol -->
+    <text x="0" y="-30" font-family="Arial, sans-serif" font-size="32" font-weight="bold"
+          fill="white" text-anchor="middle">#</text>
+    
+    <!-- Bold text -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold"
+          fill="white" text-anchor="middle">**Bold**</text>
+    
+    <!-- Italic text -->
+    <text x="0" y="25" font-family="Arial, sans-serif" font-size="20" font-style="italic"
+          fill="white" text-anchor="middle">*Italic*</text>
+    
+    <!-- Code block -->
+    <rect x="-50" y="40" width="100" height="30" rx="2" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1"/>
+    <text x="0" y="60" font-family="Monaco, monospace" font-size="16"
+          fill="white" text-anchor="middle">code</text>
+    
+    <!-- List item -->
+    <circle cx="-40" cy="85" r="3" fill="white"/>
+    <line x1="-35" y1="85" x2="40" y2="85" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- Text -->
+  <text x="400" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold"
+        fill="white" text-anchor="middle">Markdown Feature Test</text>
+  <text x="400" y="400" font-family="Arial, sans-serif" font-size="22"
+        fill="rgba(255,255,255,0.9)" text-anchor="middle">Comprehensive Testing of All Markdown Features</text>
+</svg>
+
