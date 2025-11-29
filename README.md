@@ -1,6 +1,6 @@
 # Company Website Starter
 
-A professional Jekyll-based starter website using the [analytiq-pages-theme](https://github.com/analytiq-hub/analytiq-pages-theme). Perfect for company websites, product pages, and documentation sites. 
+A professional Jekyll-based starter website using the [analytiq-pages-theme](https://github.com/analytiq-hub/analytiq-pages-theme). Perfect for company websites, product pages, and documentation sites.
 
 ## Features
 
