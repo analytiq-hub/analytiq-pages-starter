@@ -79,6 +79,8 @@ header_pages:
     children:
       - title: "Blog"
         url: "/blog"
+      - title: "Talks"
+        url: "/talks"
       - title: "Case Studies"
         url: "/case-studies"
   - title: "Company"
@@ -112,6 +114,8 @@ site_map:
     links:
       - title: "Blog"
         url: "/blog"
+      - title: "Talks"
+        url: "/talks"
       - title: "Case Studies"
         url: "/case-studies"
   - title: "Company"
