@@ -132,6 +132,17 @@ site_map:
 # Build settings
 theme: analytiq-pages-theme
 
+# Exclude files from Jekyll processing
+# These files will not be processed or appear as pages on the site
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - Makefile
+  - LICENSE
+
 # Collections
 collections:
   posts:
