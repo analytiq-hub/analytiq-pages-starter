@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="welcomeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#welcomeGrad)"/>
+
+  <!-- Icon -->
+  <g transform="translate(400, 220)">
+    <path d="M-40,-40 L-40,40 L40,40 L40,-40 Z M-30,-30 L30,-30 L30,30 L-30,30 Z"
+          fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+    <circle cx="0" cy="-10" r="8" fill="white"/>
+    <path d="M-15,10 Q0,-5 15,10" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Text -->
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="48" font-weight="bold"
+        fill="white" text-anchor="middle">Welcome to Our Blog</text>
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="24"
+        fill="rgba(255,255,255,0.9)" text-anchor="middle">Start your journey with us</text>
+</svg>
