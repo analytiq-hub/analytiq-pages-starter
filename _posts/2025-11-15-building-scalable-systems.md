@@ -4,6 +4,7 @@ title: "5 Key Principles for Building Scalable Systems"
 date: 2025-11-15 09:00:00 -0400
 categories: engineering best-practices
 author: "Engineering Team"
+image: /assets/images/blog/scalable-systems.svg
 ---
 
 Scalability is one of the most critical considerations when building modern software systems. Here are five key principles we follow when designing scalable architectures.

@@ -4,6 +4,7 @@ title: "Welcome to Our Blog"
 date: 2025-11-01 10:00:00 -0400
 categories: company announcements
 author: "Your Name"
+image: /assets/images/blog/welcome.svg
 ---
 
 We're excited to launch our new blog! This is where we'll share insights, updates, and stories about our journey in building innovative solutions for modern businesses.

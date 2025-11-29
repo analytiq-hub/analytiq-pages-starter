@@ -4,6 +4,7 @@ title: "API Design Best Practices: Building Developer-Friendly Interfaces"
 date: 2025-11-22 14:00:00 -0400
 categories: engineering api
 author: "Engineering Team"
+image: /assets/images/blog/api-design.svg
 ---
 
 A well-designed API can be the difference between frustrated developers and delighted users. Here's our approach to creating APIs that developers love to use.
