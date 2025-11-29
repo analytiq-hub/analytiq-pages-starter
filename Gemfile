@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+# Analytiq Pages Theme
+gem "analytiq-pages-theme", git: "https://github.com/analytiq-hub/analytiq-pages-theme.git"
+
+# Use GitHub Pages compatible Jekyll version
+gem "github-pages", group: :jekyll_plugins
+
+# If you have any plugins, put them here!
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-pdf-embed", "1.1.2.1"
+  gem "jekyll-paginate-v2", "~> 3.0"
+end
