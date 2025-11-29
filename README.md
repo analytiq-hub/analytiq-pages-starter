@@ -70,6 +70,14 @@ Edit `_config.yml` to update:
 - Navigation menus
 - Footer sitemap
 
+### Branding Assets
+
+Add your branding assets to customize the look:
+
+- **Favicon**: Add `favicon.ico` to the root directory (you can generate one at [favicon.io](https://favicon.io/))
+- **Logo**: Add your logo to `assets/images/logo.png`
+- **Images**: Store other images in `assets/images/`
+
 ### Navigation Menu
 
 The header navigation is configured in `_config.yml` under `header_pages`. You can create multi-level dropdown menus:
