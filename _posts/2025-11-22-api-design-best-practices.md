@@ -1,124 +1,272 @@
 ---
 layout: post
-title: "API Design Best Practices: Building Developer-Friendly Interfaces"
+title: "Configuration API Design: Making Static Sites Configurable"
 date: 2025-11-22 14:00:00 -0400
-categories: engineering api
+categories: engineering jekyll
 author: "Engineering Team"
 image: /assets/images/blog/api-design.svg
 ---
 
-A well-designed API can be the difference between frustrated developers and delighted users. Here's our approach to creating APIs that developers love to use.
+While static sites don't have REST APIs, they do have configuration APIs—the interfaces through which developers customize and extend the site. In Jekyll-based sites like Analytiq Pages Starter, good configuration design is crucial for usability and maintainability.
 
-## RESTful Design Principles
+## What is a Configuration API?
 
-We follow REST conventions to create predictable, intuitive APIs:
+In static site generators, the configuration API includes:
 
-### Use Clear Resource Naming
+- **Site configuration** (`_config.yml`): Global settings and metadata
+- **Front matter**: Page-specific configuration
+- **Template variables**: Data available in Liquid templates
+- **Includes**: Reusable components with parameters
 
-```
-Good:
-GET    /api/v1/users
-POST   /api/v1/users
-GET    /api/v1/users/{id}
-PUT    /api/v1/users/{id}
-DELETE /api/v1/users/{id}
+## Design Principles
 
-Avoid:
-GET    /api/v1/getAllUsers
-POST   /api/v1/createNewUser
-```
+### 1. Clear and Intuitive Structure
 
-### Leverage HTTP Methods Appropriately
+Configuration should be self-documenting:
 
-- `GET` for retrieving data
-- `POST` for creating resources
-- `PUT/PATCH` for updates
-- `DELETE` for removal
+```yaml
+# Good: Clear, hierarchical structure
+header_pages:
+  - title: "Products"
+    url: "#"
+    children:
+      - title: "Overview"
+        url: "/products"
 
-## Versioning Strategy
-
-Always version your APIs to allow for evolution without breaking existing integrations:
-
-```
-https://api.yourcompany.com/v1/resources
-https://api.yourcompany.com/v2/resources
+# Bad: Flat, unclear structure
+nav_products_title: "Products"
+nav_products_url: "/products"
 ```
 
-## Comprehensive Documentation
+### 2. Sensible Defaults
 
-Great documentation includes:
+Provide defaults that work out of the box:
 
-1. **Clear Examples**: Show request and response formats
-2. **Error Handling**: Document all possible error codes
-3. **Authentication**: Explain how to authenticate requests
-4. **Rate Limits**: Communicate usage limits upfront
+```yaml
+# Theme provides sensible defaults
+theme: analytiq-pages-theme
 
-## Consistent Error Responses
-
-Use a standard error format across all endpoints:
-
-```json
-{
-  "error": {
-    "code": "INVALID_REQUEST",
-    "message": "The user ID is required",
-    "field": "user_id",
-    "request_id": "req_abc123"
-  }
-}
+# Pagination has reasonable defaults
+pagination:
+  enabled: true
+  per_page: 5  # Not too many, not too few
 ```
 
-## Rate Limiting and Throttling
+### 3. Consistent Naming Conventions
 
-Protect your API and provide clear feedback:
+Use consistent patterns throughout:
 
-```http
-HTTP/1.1 429 Too Many Requests
-X-RateLimit-Limit: 1000
-X-RateLimit-Remaining: 0
-X-RateLimit-Reset: 1640995200
+- **kebab-case** for URLs: `/docs/getting-started/`
+- **snake_case** for YAML keys: `header_pages`, `site_map`
+- **camelCase** for JavaScript variables (if needed)
+
+### 4. Type Safety Through Documentation
+
+Document expected types clearly:
+
+```yaml
+# Site Configuration API
+title: string          # Required
+author:
+  name: string         # Optional
+  email: string        # Optional
+pagination:
+  enabled: boolean     # Required
+  per_page: integer    # Required
 ```
 
-## Pagination for Large Datasets
+## Front Matter API Design
 
-Don't return thousands of records in a single response:
+Front matter provides page-specific configuration:
 
-```json
-{
-  "data": [...],
-  "pagination": {
-    "total": 1250,
-    "page": 1,
-    "per_page": 50,
-    "total_pages": 25
-  },
-  "links": {
-    "next": "/api/v1/users?page=2",
-    "prev": null
-  }
-}
+### Essential Fields
+
+Every page should have:
+
+```yaml
+---
+layout: page          # Required: Which template to use
+title: Page Title     # Required: Page title
+permalink: /page/     # Recommended: Explicit URL
+---
 ```
 
-## Security Best Practices
+### Optional but Useful
 
-- Always use HTTPS
-- Implement proper authentication (OAuth 2.0, API keys)
-- Validate all input
-- Implement request signing for sensitive operations
-- Use CORS appropriately
+```yaml
+---
+description: SEO description
+image: Featured image URL
+categories: Content organization
+---
+```
 
-## Performance Considerations
+## Template Variable API
 
-- Support field selection (`?fields=id,name,email`)
-- Enable compression
-- Use ETags for caching
-- Implement partial responses
+Make data easily accessible in templates:
+
+### Site-Wide Variables
+
+```liquid
+{{ site.title }}           # Site title
+{{ site.description }}     # Site description
+{{ site.header_pages }}    # Navigation structure
+{{ site.posts }}           # All blog posts
+```
+
+### Page Variables
+
+```liquid
+{{ page.title }}           # Page title
+{{ page.url }}            # Page URL
+{{ page.content }}        # Page content
+{{ page.date }}           # Publication date
+```
+
+### Pagination Variables
+
+```liquid
+{{ paginator.page }}              # Current page
+{{ paginator.total_pages }}       # Total pages
+{{ paginator.next_page_path }}    # Next page URL
+```
+
+## Include API Design
+
+Includes should be flexible and well-documented:
+
+### Parameter Documentation
+
+```liquid
+{% comment %}
+  Parameters:
+    - file: (required) Path to .excalidraw file
+    - mode: (optional) "static", "interactive", or "link"
+{% endcomment %}
+{% include excalidraw.html file="/path/to/file.excalidraw" mode="static" %}
+```
+
+### Sensible Defaults
+
+```liquid
+# Works with just required parameter
+{% include excalidraw-static.html file="/diagram.excalidraw" %}
+
+# Optional parameters enhance functionality
+{% include excalidraw.html file="/diagram.excalidraw" mode="interactive" height="800px" %}
+```
+
+## Error Handling
+
+### Clear Error Messages
+
+When configuration is invalid:
+
+```yaml
+# Jekyll will show clear errors:
+# "Liquid Exception: Invalid syntax for include tag"
+# "Configuration file contains invalid YAML"
+```
+
+### Validation Patterns
+
+- **Required fields**: Document clearly, fail fast if missing
+- **Type checking**: Use appropriate YAML types
+- **Value validation**: Check ranges, formats where applicable
+
+## Documentation Best Practices
+
+### Provide Examples
+
+Every configuration option should have examples:
+
+```yaml
+# Example: Multi-level navigation
+header_pages:
+  - title: "Products"
+    url: "#"
+    children:
+      - title: "Overview"
+        url: "/products"
+```
+
+### Show Common Patterns
+
+Document typical use cases:
+
+```yaml
+# Pattern: Simple page
+---
+layout: page
+title: About
+permalink: /about/
+---
+
+# Pattern: Blog post
+---
+layout: post
+title: "Post Title"
+date: 2025-11-29 10:00:00 -0400
+categories: engineering
+---
+```
+
+## Versioning and Compatibility
+
+### Backward Compatibility
+
+When adding new configuration options:
+
+- Make them optional with sensible defaults
+- Don't break existing configurations
+- Document migration paths for breaking changes
+
+### Theme Versioning
+
+```yaml
+# Gemfile
+gem "analytiq-pages-theme",
+    git: "https://github.com/analytiq-hub/analytiq-pages-theme.git",
+    tag: "v0.1.8"  # Pin to specific version
+```
+
+## Real-World Example: Analytiq Pages Starter
+
+The Analytiq Pages Starter demonstrates these principles:
+
+### Clean Configuration Structure
+
+```yaml
+# Site metadata (clear, required fields)
+title: Your Company Name
+author:
+  name: Your Name
+  email: "hello@yourcompany.com"
+
+# Navigation (hierarchical, intuitive)
+header_pages:
+  - title: "Products"
+    children:
+      - title: "Overview"
+        url: "/products"
+
+# Pagination (sensible defaults)
+pagination:
+  enabled: true
+  per_page: 5
+```
+
+### Well-Documented APIs
+
+- [API Reference](/docs/api-reference/) documents all configuration options
+- Examples for every major feature
+- Clear parameter tables with types and descriptions
 
 ## Conclusion
 
-A well-designed API is an investment in your platform's future. It reduces integration time, improves developer experience, and ultimately drives adoption.
+Good configuration API design makes static sites more maintainable and easier to customize. By following these principles—clear structure, sensible defaults, consistent naming, and comprehensive documentation—you create an interface that's both powerful and approachable.
 
-Check out our [API documentation](/docs/api-reference/) to see these principles in action.
+Check out our [API Reference](/docs/api-reference/) to see these principles in action with the Analytiq Pages Starter.
 
 ---
 
