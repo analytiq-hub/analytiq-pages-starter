@@ -1,27 +1,6 @@
 # Agent Instructions for Analytiq Pages Starter
 
-This file provides guidance for AI agents (Claude, Cursor, etc.) working with the Analytiq Pages Starter codebase. This file is excluded from Jekyll processing and will not appear as a page on the website.
-
-## How This File is Excluded from Jekyll
-
-This file is excluded from Jekyll processing by adding it to the `exclude` list in `_config.yml`:
-
-```yaml
-exclude:
-  - AGENTS.md
-  - CLAUDE.md
-  - README.md
-  - Gemfile
-  - Gemfile.lock
-  - Makefile
-  - LICENSE
-```
-
-Files listed in `exclude` are:
-- Not processed by Jekyll
-- Not included in the `_site/` output directory
-- Not accessible as web pages
-- Still available in the repository for agents and developers to read
+This file provides guidance for AI agents (Claude, Cursor, etc.) working with the Analytiq Pages Starter codebase. 
 
 ## Project Overview
 
@@ -102,7 +81,8 @@ analytiq-pages-starter/
 ### Adding a Blog Post
 
 1. Create file in `_posts/` with format: `YYYY-MM-DD-title.md`
-2. Add front matter:
+2. Create SVG splash image (see "Creating SVG Splash Images" below)
+3. Add front matter:
    ```yaml
    ---
    layout: post
@@ -113,6 +93,56 @@ analytiq-pages-starter/
    image: /assets/images/blog/image.svg
    ---
    ```
+
+#### Creating SVG Splash Images
+
+Blog posts should include a custom SVG splash image that appears at the top of the post. Follow these guidelines:
+
+**Aspect Ratio**: Use **4:3** aspect ratio (800x600 viewBox)
+
+**File Location**: Save in `/assets/images/blog/` with a descriptive filename (e.g., `api-design.svg`, `scalable-systems.svg`)
+
+**Structure**:
+1. **Background**: Use a linear gradient with brand colors
+2. **Central Icon/Illustration**: Place at y=200, centered horizontally (x=400)
+3. **Title Text**: Position at y=360, font-size 40-42px, bold, white, centered
+4. **Subtitle Text**: Position at y=400, font-size 22px, rgba white with 0.9 opacity, centered
+
+**Template**:
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="gradientId" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#COLOR1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#COLOR2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#gradientId)"/>
+
+  <!-- Central Icon/Illustration -->
+  <g transform="translate(400, 200)">
+    <!-- Your icon/illustration here -->
+    <!-- Keep it around 200px wide/tall, centered -->
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold"
+        fill="white" text-anchor="middle">Post Title</text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="400" font-family="Arial, sans-serif" font-size="22"
+        fill="rgba(255,255,255,0.9)" text-anchor="middle">Post Subtitle or Description</text>
+</svg>
+```
+
+**Design Tips**:
+- Use white text/icons on gradient backgrounds for contrast
+- Keep icons simple and recognizable (browser windows, code brackets, architecture diagrams, etc.)
+- Use brand colors for gradients (purple/blue, green/blue combinations work well)
+- Ensure text is readable - use white or very light colors
+- Icons should be approximately 200px wide/tall and centered
 
 ### Adding Documentation
 
@@ -136,6 +166,92 @@ Add edit link:
   </a>
 </div>
 ```
+
+## Creating SVG and Excalidraw Diagrams
+
+### SVG Diagrams
+
+SVG diagrams are ideal for:
+- **Blog post splash images** (see "Creating SVG Splash Images" above)
+- **Simple illustrations** embedded in content
+- **Icons and graphics** that need to scale perfectly
+
+**Best Practices for SVG Diagrams**:
+
+1. **Use semantic structure**: Group related elements with `<g>` tags
+2. **Define reusable elements**: Use `<defs>` for gradients, patterns, and markers
+3. **Optimize for size**: Remove unnecessary attributes, use minimal paths
+4. **Ensure accessibility**: Add `<title>` and `<desc>` elements for screen readers
+5. **Use relative units**: Prefer `viewBox` over fixed pixel dimensions when possible
+6. **Consistent styling**: Use CSS classes or inline styles consistently
+
+**Example Structure**:
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <!-- Define gradients, patterns, markers here -->
+    <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#COLOR1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#COLOR2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#myGradient)"/>
+  
+  <!-- Grouped elements -->
+  <g transform="translate(400, 300)">
+    <!-- Your diagram elements -->
+  </g>
+</svg>
+```
+
+**File Organization**:
+- Blog splash images: `/assets/images/blog/*.svg`
+- Documentation diagrams: `/assets/images/docs/*.svg`
+- General illustrations: `/assets/images/*.svg`
+
+### Excalidraw Diagrams
+
+Excalidraw diagrams are ideal for:
+- **Architecture diagrams** showing system components and relationships
+- **Flowcharts and process diagrams**
+- **Complex technical illustrations** that benefit from interactive editing
+- **Diagrams that may need frequent updates**
+
+**Best Practices for Excalidraw Diagrams**:
+
+1. **Use descriptive filenames**: `analytiq-pages-architecture.excalidraw`, `github-pages-deployment.excalidraw`
+2. **Organize with frames**: Use Excalidraw frames to group related elements
+3. **Consistent styling**: Use a consistent color palette and font sizes
+4. **Clear labels**: Ensure all components are clearly labeled
+5. **Logical flow**: Arrange elements top-to-bottom or left-to-right for readability
+6. **Export considerations**: Diagrams render as static images, so ensure they're readable without interaction
+
+**File Organization**:
+- Store all Excalidraw files in `/assets/excalidraw/`
+- Use kebab-case for filenames: `diagram-name.excalidraw`
+
+**Creating Excalidraw Diagrams**:
+
+1. **Use the Excalidraw editor**: Access via `/excalidraw-edit.html` or use excalidraw.com
+2. **Save as JSON**: Excalidraw files are JSON format with `.excalidraw` extension
+3. **Embed in content**: Use the `excalidraw-static.html` include (see above)
+4. **Add edit links**: Always include an edit link below embedded diagrams for easy updates
+
+**When to Use SVG vs Excalidraw**:
+
+- **Use SVG** for:
+  - Simple illustrations and icons
+  - Blog post splash images
+  - Graphics that need precise control
+  - Small, static diagrams
+
+- **Use Excalidraw** for:
+  - Complex architecture diagrams
+  - Flowcharts with multiple components
+  - Diagrams that may need collaborative editing
+  - Technical illustrations with many elements
 
 ## Liquid Template Syntax
 
