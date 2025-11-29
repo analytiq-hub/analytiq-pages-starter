@@ -1,9 +1,8 @@
 ---
-layout: page
+layout: docs
 title: User Guide
+permalink: /docs/user-guide/
 ---
-
-# User Guide
 
 This comprehensive guide covers all the features and functionality of our platform.
 

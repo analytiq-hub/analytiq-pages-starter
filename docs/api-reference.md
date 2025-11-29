@@ -1,9 +1,8 @@
 ---
-layout: page
+layout: docs
 title: API Reference
+permalink: /docs/api-reference/
 ---
-
-# API Reference
 
 Complete reference documentation for our REST API.
 

@@ -1,9 +1,8 @@
 ---
-layout: page
+layout: docs
 title: Getting Started
+permalink: /docs/getting-started/
 ---
-
-# Getting Started
 
 Welcome! This guide will help you get up and running with our platform in just a few minutes.
 
