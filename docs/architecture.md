@@ -378,13 +378,21 @@ This file is automatically included by the theme's `head.html`.
 To add an Excalidraw diagram:
 
 1. Create diagram file in `assets/excalidraw/` (e.g., `my-diagram.excalidraw`)
-2. Reference it in markdown:
-   ```html
-   <div class="my-8">
-     <div class="excalidraw-wrapper" data-diagram="my-diagram"></div>
-   </div>
+2. Reference it in markdown using the include:
+   ```liquid
+   {% include excalidraw-static.html file="/assets/excalidraw/my-diagram.excalidraw" %}
    ```
 3. The theme's JavaScript will render it automatically
+4. Add an edit link (optional):
+   ```liquid
+   <div class="text-sm text-gray-500 mt-2 mb-6 text-center">
+     <a href="{{ '/excalidraw-edit' | relative_url }}?file={{ '/assets/excalidraw/my-diagram.excalidraw' | relative_url }}" 
+        class="text-gray-500 hover:text-gray-700 no-underline" 
+        target="_blank">
+       Edit diagram
+     </a>
+   </div>
+   ```
 
 ## Troubleshooting
 

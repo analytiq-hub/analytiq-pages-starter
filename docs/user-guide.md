@@ -4,307 +4,354 @@ title: User Guide
 permalink: /docs/user-guide/
 ---
 
-This comprehensive guide covers all the features and functionality of our platform.
+This comprehensive guide covers customization and content management for your Analytiq Pages Starter site.
 
 ## Table of Contents
 
-- [Dashboard Overview](#dashboard-overview)
-- [Managing Projects](#managing-projects)
-- [Working with Data](#working-with-data)
-- [User Management](#user-management)
-- [Settings and Configuration](#settings-and-configuration)
-- [Analytics and Reporting](#analytics-and-reporting)
+- [Site Configuration](#site-configuration)
+- [Adding Pages](#adding-pages)
+- [Managing Blog Posts](#managing-blog-posts)
+- [Customizing Navigation](#customizing-navigation)
+- [Working with Assets](#working-with-assets)
+- [Customization Options](#customization-options)
 
-## Dashboard Overview
+## Site Configuration
 
-The dashboard is your central hub for monitoring activity and accessing key features.
+### Basic Settings
 
-### Key Sections
+Edit `_config.yml` to configure your site:
 
-**Overview Panel**
-- Recent activity feed
-- Quick stats and metrics
-- Important notifications
+```yaml
+# Site Metadata
+title: Your Company Name
+author:
+  name: Your Name
+  email: "hello@yourcompany.com"
+description: Your company description
 
-**Quick Actions**
-- Create new project
-- Upload data
-- Invite team members
-- View reports
-
-**Navigation**
-- Projects: Access all your projects
-- Data: Manage your data
-- Analytics: View insights and reports
-- Settings: Configure your account
-
-## Managing Projects
-
-Projects help you organize your work and collaborate with team members.
-
-### Creating a Project
-
-1. Click the **New Project** button
-2. Enter a project name and description
-3. Choose visibility settings (Private or Team)
-4. Click **Create**
-
-### Project Settings
-
-Each project has customizable settings:
-
-- **General**: Name, description, tags
-- **Team**: Add/remove members and set permissions
-- **Integrations**: Connect external tools
-- **Advanced**: API access, webhooks, automation
-
-### Project Permissions
-
-We support role-based access control:
-
-- **Owner**: Full control over the project
-- **Admin**: Can modify settings and manage users
-- **Editor**: Can create and edit content
-- **Viewer**: Read-only access
-
-## Working with Data
-
-Our platform provides flexible data management capabilities.
-
-### Uploading Data
-
-**Via Web Interface:**
-1. Navigate to your project
-2. Click **Upload Data**
-3. Drag and drop files or click to browse
-4. Configure import settings
-5. Click **Import**
-
-**Via API:**
-```bash
-curl -X POST https://api.yourcompany.com/v1/data/upload \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -F "file=@data.csv" \
-  -F "project_id=proj_abc123"
+# Theme
+theme: analytiq-pages-theme
 ```
 
-### Data Formats
+### Social Media Links
 
-We support various data formats:
+Add social media links in `_config.yml`:
 
-- CSV (Comma-Separated Values)
-- JSON (JavaScript Object Notation)
-- XML (eXtensible Markup Language)
-- Excel (.xlsx)
-- Parquet
-
-### Data Validation
-
-All uploaded data goes through validation:
-
-- Schema checking
-- Data type verification
-- Constraint validation
-- Duplicate detection
-
-### Querying Data
-
-Use our query interface to filter and retrieve data:
-
-**Simple Query:**
-```sql
-SELECT * FROM dataset
-WHERE status = 'active'
-ORDER BY created_at DESC
-LIMIT 100
+```yaml
+social_links:
+  twitter: yourcompany
+  github: yourcompany
+  linkedin: yourcompany
 ```
 
-**Aggregation:**
-```sql
-SELECT category, COUNT(*) as count, AVG(value) as avg_value
-FROM dataset
-GROUP BY category
+### Footer Sitemap
+
+Configure the footer navigation:
+
+```yaml
+site_map:
+  - title: "Products"
+    links:
+      - title: "Overview"
+        url: "/products"
+      - title: "Features"
+        url: "/features"
 ```
 
-## User Management
+## Adding Pages
 
-### Adding Team Members
+### Creating a New Page
 
-1. Go to **Settings** → **Team**
-2. Click **Invite Member**
-3. Enter email address
-4. Select role
-5. Click **Send Invitation**
+1. Create a markdown file at the root (e.g., `services.md`)
+2. Add front matter:
 
-### Managing Roles
-
-Change user roles at any time:
-
-1. Navigate to team settings
-2. Find the user
-3. Click the role dropdown
-4. Select new role
-5. Changes take effect immediately
-
-### Removing Users
-
-1. Go to team settings
-2. Find the user
-3. Click **Remove**
-4. Confirm the action
-
-## Settings and Configuration
-
-### Account Settings
-
-**Profile Information:**
-- Update name and email
-- Upload profile picture
-- Set timezone and language preferences
-
-**Security:**
-- Change password
-- Enable two-factor authentication
-- Manage active sessions
-- View login history
-
-**Notifications:**
-- Email preferences
-- Slack/Teams integration
-- SMS alerts (Enterprise only)
-
-### API Keys
-
-**Creating API Keys:**
-1. Go to **Settings** → **API Keys**
-2. Click **Create New Key**
-3. Enter a description
-4. Set permissions
-5. Save the key securely
-
-**Best Practices:**
-- Use different keys for different environments
-- Rotate keys regularly
-- Never commit keys to version control
-- Use environment variables
-
-### Webhooks
-
-Set up webhooks to receive real-time notifications:
-
-```bash
-curl -X POST https://api.yourcompany.com/v1/webhooks \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -d '{
-    "url": "https://yourapp.com/webhook",
-    "events": ["data.created", "data.updated"],
-    "secret": "your_webhook_secret"
-  }'
+```yaml
+---
+layout: page
+title: Services
+permalink: /services/
+---
 ```
 
-## Analytics and Reporting
+3. Add your content in Markdown below the front matter
+4. Add navigation link in `_config.yml` under `header_pages`
 
-### Built-in Dashboards
+### Page Layouts
 
-Access pre-built dashboards for common metrics:
+Available layouts:
 
-- **Usage Dashboard**: API calls, storage, bandwidth
-- **Performance Dashboard**: Response times, error rates
-- **Business Dashboard**: User growth, engagement metrics
+- **`default`**: Standard page layout with header and footer
+- **`page`**: Content-focused page layout
+- **`post`**: Blog post layout
+- **`docs`**: Documentation layout with sidebar
 
-### Custom Reports
+### Adding Documentation Pages
 
-Create custom reports:
+1. Create markdown file in `docs/` directory (e.g., `docs/troubleshooting.md`)
+2. Set front matter:
 
-1. Go to **Analytics** → **Custom Reports**
-2. Click **New Report**
-3. Select data sources
-4. Choose metrics and dimensions
-5. Configure visualization
-6. Save and schedule
+```yaml
+---
+layout: docs
+title: Troubleshooting
+permalink: /docs/troubleshooting/
+---
+```
 
-### Exporting Data
+3. Add link to `_includes/docs-widget.html` navigation
+4. Content will automatically use docs layout with sidebar
 
-Export reports in various formats:
+## Managing Blog Posts
 
-- PDF for presentations
-- CSV for further analysis
-- Excel with charts
-- JSON for programmatic access
+### Creating a Blog Post
 
-### Scheduled Reports
+1. Create file in `_posts/` with format: `YYYY-MM-DD-post-title.md`
+2. Include front matter:
 
-Automate report delivery:
+```yaml
+---
+layout: post
+title: "Your Post Title"
+date: 2025-11-29 10:00:00 -0400
+categories: category1 category2
+author: "Author Name"
+image: /assets/images/blog/image.svg
+---
+```
 
-1. Create or open a report
-2. Click **Schedule**
-3. Set frequency (daily, weekly, monthly)
-4. Choose recipients
-5. Select format
-6. Save schedule
+3. Write your content in Markdown
+4. Post will appear on blog page and in RSS feed
 
-## Advanced Features
+### Post Categories
 
-### Automation
+Organize posts by category:
 
-Set up automated workflows:
+- Categories are space-separated in front matter
+- Posts appear under `/category-name/` URLs
+- Categories are displayed as badges on the blog listing
 
-- Auto-process incoming data
-- Trigger actions based on conditions
-- Schedule recurring tasks
-- Chain multiple operations
+### Post Images
 
-### Custom Integrations
+Add images to blog posts:
 
-Connect with external systems:
+1. Place images in `assets/images/blog/`
+2. Reference in front matter: `image: /assets/images/blog/image.svg`
+3. Images appear as previews on the blog listing page
 
-- REST API for full programmatic access
-- Pre-built connectors for popular tools
-- Zapier integration
-- Custom webhooks
+## Customizing Navigation
 
-### Bulk Operations
+### Header Navigation
 
-Perform operations at scale:
+Configure multi-level dropdown menus in `_config.yml`:
 
-- Bulk import/export
-- Batch updates
-- Mass user management
-- Automated data transformations
+```yaml
+header_pages:
+  - title: "Products"
+    url: "#"
+    children:
+      - title: "Overview"
+        url: "/products"
+      - title: "Features"
+        url: "/features"
+  - title: "Get Started"
+    url: "/contact"
+    button_style: "solid"  # Makes it a button
+```
+
+### Documentation Sidebar
+
+Customize the docs sidebar by editing `_includes/docs-widget.html`:
+
+```html
+<a href="/docs/your-page/"
+   class="flex items-center px-2 py-1 text-xs text-gray-700 hover:text-blue-600">
+  Your Page Name
+</a>
+```
+
+## Working with Assets
+
+### Images
+
+Store images in `assets/images/`:
+
+- **Blog images**: `assets/images/blog/`
+- **General images**: `assets/images/`
+- **Logo**: `assets/images/logo.png`
+
+Reference images in Markdown:
+
+```markdown
+![Alt text](/assets/images/image.png)
+```
+
+### Excalidraw Diagrams
+
+To add an Excalidraw diagram:
+
+1. Create diagram file in `assets/excalidraw/` (e.g., `my-diagram.excalidraw`)
+2. Reference it in markdown:
+
+```liquid
+{% include excalidraw-static.html file="/assets/excalidraw/my-diagram.excalidraw" %}
+```
+
+3. The theme's JavaScript will render it automatically
+
+### PDF Documents
+
+Embed PDF files using the `jekyll-pdf-embed` plugin:
+
+```markdown
+{% pdf "/path/to/document.pdf" %}
+```
+
+## Customization Options
+
+### Overriding Theme Components
+
+You can override any theme file by creating a file with the same path:
+
+**Override Includes:**
+- Create `_includes/filename.html` in your site
+- Example: `_includes/docs-widget.html` (already included)
+
+**Override Layouts:**
+- Create `_layouts/filename.html` in your site
+- Extend theme layouts as needed
+
+### Custom CSS
+
+Add custom styles by creating `_includes/custom-head.html`:
+
+```html
+<style>
+  /* Your custom CSS */
+  .my-custom-class {
+    color: blue;
+  }
+</style>
+```
+
+This file is automatically included by the theme's `head.html`.
+
+### Custom JavaScript
+
+Add custom scripts via includes:
+
+1. Create `_includes/custom-footer.html`
+2. Add your script tags:
+
+```html
+<script>
+  // Your custom JavaScript
+</script>
+```
+
+### Contact Form Setup
+
+The contact form requires a form submission service:
+
+1. Choose a service:
+   - [Formspree](https://formspree.io/)
+   - [Netlify Forms](https://www.netlify.com/products/forms/)
+   - [Getform](https://getform.io/)
+
+2. Update the form action in `contact.md`:
+
+```html
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+```
+
+## Content Best Practices
+
+### Markdown Formatting
+
+Use standard Markdown syntax:
+
+- **Bold**: `**text**`
+- *Italic*: `*text*`
+- Links: `[text](url)`
+- Code: `` `code` `` or code blocks with triple backticks
+
+### Front Matter
+
+Always include essential front matter:
+
+- `layout`: Page layout type
+- `title`: Page title
+- `permalink`: URL path (optional but recommended)
+
+### File Naming
+
+- Use kebab-case for file names: `my-page.md`
+- Blog posts must start with date: `YYYY-MM-DD-title.md`
+- Use descriptive names
+
+## Advanced Customization
+
+### Pagination
+
+Configure pagination in `_config.yml`:
+
+```yaml
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+```
+
+### Collections
+
+The starter uses a `posts` collection. You can add more:
+
+```yaml
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:title/
+  your_collection:
+    output: true
+```
+
+### SEO Optimization
+
+The theme includes `jekyll-seo-tag` for automatic SEO:
+
+- Meta tags are generated automatically
+- Open Graph tags for social sharing
+- Twitter Card support
+
+Customize in front matter:
+
+```yaml
+---
+title: Page Title
+description: Page description for SEO
+image: /assets/images/og-image.png
+---
+```
 
 ## Troubleshooting
 
-### Common Issues
+### Styles Not Applying
 
-**API Key Not Working:**
-- Verify the key is active
-- Check permissions
-- Ensure correct environment (staging vs production)
+- Clear Jekyll cache: `bundle exec jekyll clean`
+- Check for syntax errors in overridden files
+- Verify Tailwind CDN is loading in browser dev tools
 
-**Upload Failures:**
-- Check file format
-- Verify file size (max 100MB)
-- Ensure data meets schema requirements
+### Content Not Updating
 
-**Slow Performance:**
-- Review query complexity
-- Check rate limits
-- Consider pagination for large datasets
+- Restart Jekyll server: `bundle exec jekyll serve`
+- Clear browser cache
+- Check for syntax errors in Markdown
 
-### Getting Help
+### Navigation Not Showing
 
-If you encounter issues:
-
-1. Check this documentation
-2. Search our [knowledge base](#)
-3. Review [code examples](https://github.com/yourcompany/examples)
-4. [Contact support](/contact/)
+- Verify `header_pages` configuration in `_config.yml`
+- Check file paths are correct
+- Ensure pages exist at specified URLs
 
 ---
 
-## Next Steps
-
-- Explore the [API Reference](/docs/api-reference/)
-- Check out [code examples](https://github.com/yourcompany/examples)
-- Join our [community forum](#)
-- [Contact us](/contact/) for enterprise features
+**Need more details?** Check out the [Architecture](/docs/architecture/) guide or [API Reference](/docs/api-reference/).
