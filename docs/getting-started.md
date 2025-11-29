@@ -4,194 +4,278 @@ title: Getting Started
 permalink: /docs/getting-started/
 ---
 
-Welcome! This guide will help you get up and running with our platform in just a few minutes.
-
-## Prerequisites
-
-Before you begin, make sure you have:
-
-- An active account (if you don't have one, [sign up here](/contact/))
-- Basic understanding of REST APIs
-- Your preferred programming language's HTTP client library
+Welcome! This guide will help you get your Analytiq Pages Starter site up and running in just a few minutes.
 
 ## Quick Start
 
-### 1. Get Your API Key
+Creating a company website requires only two steps:
 
-First, you'll need to obtain your API key:
+1. **Click "Use this template"** to fork the repository along with its built-in GitHub Action workflow
+2. **Enable GitHub Pages** in Settings → Pages, and re-run the Action pipeline to build the site
 
-1. Log in to your dashboard
-2. Navigate to **Settings** → **API Keys**
-3. Click **Create New API Key**
-4. Save your API key securely (it won't be shown again)
+That's it! Your site will be live at `https://yourusername.github.io/repo-name/` once the workflow completes.
 
-### 2. Make Your First API Call
+## Basic Configuration
 
-Here's a simple example to test your connection:
+### 1. Update Site Information
+
+Edit `_config.yml` to customize your site:
+
+```yaml
+title: Your Company Name
+author:
+  name: Your Name
+  email: "hello@yourcompany.com"
+description: Your company description
+```
+
+### 2. Update Repository URL
+
+Set your GitHub repository URL:
+
+```yaml
+repository: yourusername/your-repo-name
+```
+
+### 3. Customize Navigation
+
+Edit the `header_pages` section in `_config.yml` to customize your navigation menu:
+
+```yaml
+header_pages:
+  - title: "Products"
+    url: "#"
+    children:
+      - title: "Overview"
+        url: "/products"
+      - title: "Features"
+        url: "/features"
+```
+
+### 4. Add Social Media Links
+
+Configure social links in `_config.yml`:
+
+```yaml
+social_links:
+  twitter: yourcompany
+  github: yourcompany
+  linkedin: yourcompany
+```
+
+## Local Development
+
+### Prerequisites
+
+Before you can run the site locally, make sure you have the following installed:
+
+- **Ruby** 3.2 or later ([Install Ruby](https://www.ruby-lang.org/en/documentation/installation/))
+- **Bundler** gem (`gem install bundler`)
+- **Git** for version control
+- **Make** (optional but recommended - see installation instructions below)
+
+**Verify your installation:**
+```bash
+ruby --version  # Should be 3.2 or later
+bundle --version
+git --version
+make --version
+```
+
+### Installing Dependencies
+
+Once prerequisites are installed, install the project dependencies:
+
+1. **Install Ruby dependencies**:
+   ```bash
+   bundle install
+   ```
+   This installs Jekyll and all required gems specified in the `Gemfile`.
+
+2. **Install Make (optional but recommended)**:
+   
+   Make is a build automation tool that simplifies running common commands. It's usually pre-installed on Linux and macOS, but you may need to install it on Windows.
+   
+   **Linux (Ubuntu/Debian):**
+   ```bash
+   sudo apt-get install make
+   ```
+   
+   **macOS:**
+   Make is pre-installed. If you need to update it, install via Homebrew:
+   ```bash
+   brew install make
+   ```
+   
+   **Windows:**
+   - Install via [Chocolatey](https://chocolatey.org/): `choco install make`
+   - Or use [GnuWin32](http://gnuwin32.sourceforge.net/packages/make.htm)
+   - Or use WSL (Windows Subsystem for Linux) which includes make
+
+### Starting the Server
+
+Once dependencies are installed, use one of these methods:
+
+**Using Make (recommended):**
+```bash
+make serve
+```
+
+**Using Bundler directly:**
+```bash
+bundle exec jekyll serve
+```
+
+**With live reload:**
+```bash
+bundle exec jekyll serve --livereload
+```
+
+The site will be available at **http://localhost:4000**
+
+### Building for Production
+
+To build the site without running a server:
 
 ```bash
-curl -X GET https://api.yourcompany.com/v1/status \
-  -H "Authorization: Bearer YOUR_API_KEY"
+bundle exec jekyll build
 ```
 
-You should receive a response like:
+The generated site will be in the `_site/` directory.
 
-```json
-{
-  "status": "operational",
-  "version": "1.0.0",
-  "timestamp": "2025-11-29T12:00:00Z"
-}
-```
-
-### 3. Install the SDK (Optional)
-
-We provide official SDKs for popular languages:
-
-**Python:**
-```bash
-pip install yourcompany-sdk
-```
-
-```python
-from yourcompany import Client
-
-client = Client(api_key="YOUR_API_KEY")
-status = client.get_status()
-print(status)
-```
-
-**JavaScript/TypeScript:**
-```bash
-npm install @yourcompany/sdk
-```
-
-```javascript
-import { Client } from '@yourcompany/sdk';
-
-const client = new Client({ apiKey: 'YOUR_API_KEY' });
-const status = await client.getStatus();
-console.log(status);
-```
-
-**Go:**
-```bash
-go get github.com/yourcompany/sdk-go
-```
-
-```go
-import "github.com/yourcompany/sdk-go"
-
-client := sdk.NewClient("YOUR_API_KEY")
-status, err := client.GetStatus()
-```
-
-## Basic Concepts
-
-### Resources
-
-Our platform is organized around REST resources:
-
-- **Users**: Manage user accounts and permissions
-- **Projects**: Organize your work into projects
-- **Data**: Store and retrieve data
-- **Analytics**: Track and analyze metrics
-
-### Authentication
-
-All API requests must be authenticated using your API key in the Authorization header:
-
-```
-Authorization: Bearer YOUR_API_KEY
-```
-
-### Rate Limits
-
-To ensure fair usage, we implement rate limits:
-
-- **Free tier**: 1,000 requests per hour
-- **Professional**: 10,000 requests per hour
-- **Enterprise**: Custom limits
-
-Rate limit information is included in response headers:
-
-```
-X-RateLimit-Limit: 1000
-X-RateLimit-Remaining: 950
-X-RateLimit-Reset: 1640995200
-```
-
-### Error Handling
-
-Our API uses standard HTTP status codes:
-
-- `200` - Success
-- `400` - Bad Request (invalid parameters)
-- `401` - Unauthorized (invalid or missing API key)
-- `404` - Not Found
-- `429` - Too Many Requests (rate limit exceeded)
-- `500` - Internal Server Error
-
-Error responses include details:
-
-```json
-{
-  "error": {
-    "code": "INVALID_PARAMETER",
-    "message": "The 'email' parameter is required",
-    "field": "email"
-  }
-}
-```
-
-## Example: Creating a Resource
-
-Here's a complete example of creating a new resource:
+### Other Useful Commands
 
 ```bash
-curl -X POST https://api.yourcompany.com/v1/projects \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My First Project",
-    "description": "A sample project",
-    "settings": {
-      "visibility": "private"
-    }
-  }'
+# Clean the build directory
+bundle exec jekyll clean
+
+# Build and serve (using Make)
+make build
+make serve
 ```
 
-Response:
+## Deployment
 
-```json
-{
-  "id": "proj_abc123",
-  "name": "My First Project",
-  "description": "A sample project",
-  "settings": {
-    "visibility": "private"
-  },
-  "created_at": "2025-11-29T12:00:00Z",
-  "updated_at": "2025-11-29T12:00:00Z"
-}
+### GitHub Pages (Recommended)
+
+The repository includes a GitHub Actions workflow for automatic deployment:
+
+1. **Push your code** to the `main` branch
+2. **Enable GitHub Pages**:
+   - Go to your repository **Settings** → **Pages**
+   - Under "Source", select **GitHub Actions**
+3. **The workflow will automatically build and deploy** your site
+4. Your site will be live at `https://yourusername.github.io/repo-name/`
+
+The workflow (`.github/workflows/pages.yml`) will:
+- Build your Jekyll site
+- Deploy it to GitHub Pages
+- Run automatically on every push to `main`
+
+### Manual Deployment
+
+You can also deploy manually:
+
+1. Build the site: `bundle exec jekyll build`
+2. Upload the `_site/` directory to your hosting provider
+
+## Project Structure
+
+Understanding the key directories:
+
 ```
+analytiq-pages-starter/
+├── _config.yml          # Site configuration
+├── _includes/           # Custom includes (overrides theme)
+├── _posts/              # Blog posts
+├── docs/                # Documentation pages
+├── assets/              # Static assets (images, diagrams)
+│   ├── excalidraw/     # Excalidraw diagram files
+│   └── images/         # Image files
+├── *.md                 # Root-level pages
+└── Gemfile              # Ruby dependencies
+```
+
+## Creating Your First Page
+
+1. **Create a new markdown file** at the root (e.g., `services.md`)
+
+2. **Add front matter**:
+   ```yaml
+   ---
+   layout: page
+   title: Services
+   permalink: /services/
+   ---
+   ```
+
+3. **Add your content** in Markdown below the front matter
+
+4. **Add to navigation** in `_config.yml` under `header_pages`
+
+## Creating Your First Blog Post
+
+1. **Create a file** in `_posts/` with format: `YYYY-MM-DD-title.md`
+
+2. **Add front matter**:
+   ```yaml
+   ---
+   layout: post
+   title: "Your Post Title"
+   date: 2025-11-29 10:00:00 -0400
+   categories: category1 category2
+   author: "Author Name"
+   image: /assets/images/blog/image.svg
+   ---
+   ```
+
+3. **Write your content** in Markdown
+
+4. **Create a splash image** (see [User Guide](/docs/user-guide/) for details)
+
+## Common Issues
+
+### Bundle Install Fails
+
+If you encounter issues installing gems:
+
+```bash
+# Update bundler
+gem update bundler
+
+# Try installing again
+bundle install
+```
+
+### Port Already in Use
+
+If port 4000 is already in use:
+
+```bash
+bundle exec jekyll serve --port 4001
+```
+
+### Changes Not Appearing
+
+- Restart the Jekyll server
+- Clear browser cache
+- Check for syntax errors in `_config.yml` (YAML is sensitive to indentation)
 
 ## Next Steps
 
 Now that you're set up, explore these resources:
 
-- [User Guide](/docs/user-guide/) - Comprehensive guide to all features
-- [API Reference](/docs/api-reference/) - Detailed API documentation
-- [Code Examples](https://github.com/yourcompany/examples) - Sample projects and integrations
-- [Support](/contact/) - Get help from our team
+- [User Guide](/docs/user-guide/) - Comprehensive guide to customization and content management
+- [Architecture](/docs/architecture/) - Technical details and project structure
+- [API Reference](/docs/api-reference/) - Configuration reference
 
 ## Need Help?
 
-- Check our [FAQ](#)
-- Browse [code examples](https://github.com/yourcompany/examples)
+- Check the [User Guide](/docs/user-guide/) for detailed customization options
+- Review [Jekyll Documentation](https://jekyllrb.com/docs/)
+- Check the [Theme Repository](https://github.com/analytiq-hub/analytiq-pages-theme)
 - [Contact support](/contact/)
-- Join our [community forum](#)
 
 ---
 
-Ready to dive deeper? Continue to the [User Guide](/docs/user-guide/).
+Ready to customize your site? Continue to the [User Guide](/docs/user-guide/).
