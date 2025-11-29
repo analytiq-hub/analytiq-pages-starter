@@ -164,7 +164,7 @@ This starter includes a GitHub Actions workflow for automatic deployment to GitH
 4. **Monitor Deployment**:
    - Go to the **Actions** tab in your repository to see build progress
    - Once the workflow completes, your site will be live
-   - The deployment URL is shown in the workflow output
+   - The deployment URL is shown in the workflow output 
 
 #### Custom Domain (Optional)
 
