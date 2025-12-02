@@ -1,5 +1,3 @@
-# Agent Instructions for Analytiq Pages Starter
-
 This file provides guidance for AI agents (Claude, Cursor, etc.) working with the Analytiq Pages Starter codebase.
 
 ## Important Notes for Agents
@@ -27,7 +25,7 @@ The Analytiq Pages Starter is a Jekyll-based static site generator template that
 ## Project Structure
 
 ```
-analytiq-pages-starter/
+/
 ├── _config.yml              # Site configuration (YAML)
 ├── _includes/               # Site-specific includes (overrides theme)
 │   └── docs-widget.html    # Custom docs navigation
@@ -36,9 +34,17 @@ analytiq-pages-starter/
 ├── assets/                  # Static assets
 │   ├── excalidraw/         # Excalidraw diagram files
 │   └── images/             # Image files
-├── .github/workflows/      # GitHub Actions workflows
+│       └── blog/           # Blog post splash images
+├── .github/workflows/      # GitHub Actions workflows (optional)
 ├── *.md                     # Root-level pages (index, about, etc.)
-└── Gemfile                  # Ruby dependencies
+├── 404.html                 # Custom 404 error page
+├── excalidraw.html         # Excalidraw editor page
+├── favicon.ico             # Site favicon
+├── Gemfile                  # Ruby dependencies
+├── Gemfile.lock            # Locked dependency versions
+├── LICENSE                  # License file
+├── Makefile                # Build automation (optional)
+├── README.md               # Project documentation
 ```
 
 ## Important Files
@@ -221,7 +227,7 @@ Excalidraw diagrams are ideal for:
 
 **Best Practices for Excalidraw Diagrams**:
 
-1. **Use descriptive filenames**: `analytiq-pages-architecture.excalidraw`, `github-pages-deployment.excalidraw`
+1. **Use descriptive filenames**: `architecture-diagram.excalidraw`, `deployment-flow.excalidraw`
 2. **Organize with frames**: Use Excalidraw frames to group related elements
 3. **Consistent styling**: Use a consistent color palette and font sizes
 4. **Clear labels**: Ensure all components are clearly labeled
@@ -339,17 +345,27 @@ Visit http://localhost:4000
 
 ### File Structure
 ```
-analytiq-pages-starter/
+project-root/
 ├── _config.yml              # Site configuration (YAML)
 ├── _includes/               # Site-specific includes (overrides theme)
+│   └── docs-widget.html    # Custom docs navigation
 ├── _posts/                  # Blog posts collection
 ├── docs/                    # Documentation pages
 ├── assets/                  # Static assets
 │   ├── excalidraw/         # Excalidraw diagram files
 │   └── images/             # Image files
-├── .github/workflows/      # GitHub Actions workflows
+│       └── blog/           # Blog post splash images
+├── .github/workflows/      # GitHub Actions workflows (optional)
 ├── *.md                     # Root-level pages (index, about, etc.)
-└── Gemfile                  # Ruby dependencies
+├── 404.html                 # Custom 404 error page
+├── excalidraw.html         # Excalidraw editor page
+├── favicon.ico             # Site favicon
+├── Gemfile                  # Ruby dependencies
+├── Gemfile.lock            # Locked dependency versions
+├── LICENSE                  # License file
+├── Makefile                # Build automation (optional)
+├── README.md               # Project documentation
+└── SVG_STYLING_GUIDE.md   # SVG styling reference (optional)
 ```
 
 ### Essential Commands
