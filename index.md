@@ -117,6 +117,68 @@ title: "Your Company - Innovative Solutions"
             </div>
         </section>
 
+        <!-- Testimonials Section -->
+        <section class="bg-blue-50 rounded-lg shadow-lg p-8 mb-12">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-4 text-center">What Our Clients Say</h2>
+            <p class="text-center text-gray-600 mb-8 italic text-sm">
+                <em>Note: These are sample testimonials. Replace with your actual client testimonials.</em>
+            </p>
+            <div id="testimonials-container" class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Featured testimonials (always visible) -->
+                <!-- NOTE: These are SAMPLE testimonials with fictional names and companies. Replace with your actual client testimonials. -->
+                {% include testimonial-card.html 
+                    quote="Working with this team has been transformative for our business. Their expertise and dedication to delivering quality solutions is unmatched. Highly recommended!"
+                    name="Sarah Johnson"
+                    title="CEO"
+                    company="TechStart Inc."
+                    linkedin="https://www.linkedin.com/in/sarah-johnson" %}
+                
+                {% include testimonial-card.html 
+                    quote="The solutions provided exceeded our expectations. Professional, efficient, and results-driven. They truly understand how to solve complex business challenges."
+                    name="Michael Chen"
+                    title="CTO"
+                    company="InnovateCorp"
+                    linkedin="https://www.linkedin.com/in/michael-chen" %}
+                
+                <!-- Hidden testimonials (shown on "Load More") -->
+                <div class="testimonial-hidden hidden">
+                    {% include testimonial-card.html 
+                        quote="Outstanding service and support throughout the entire project. The team's attention to detail and commitment to excellence is remarkable."
+                        name="Emily Rodriguez"
+                        title="Director of Operations"
+                        company="Growth Solutions"
+                        linkedin="https://www.linkedin.com/in/emily-rodriguez" %}
+                </div>
+                
+                <div class="testimonial-hidden hidden">
+                    {% include testimonial-card.html 
+                        quote="We've seen significant improvements in our operations since implementing their solutions. The ROI has been exceptional."
+                        name="David Kim"
+                        title="VP of Engineering"
+                        company="ScaleUp Technologies"
+                        linkedin="https://www.linkedin.com/in/david-kim" %}
+                </div>
+                
+                <div class="testimonial-hidden hidden">
+                    {% include testimonial-card.html 
+                        quote="Professional, reliable, and innovative. They delivered exactly what we needed, on time and within budget."
+                        name="Lisa Anderson"
+                        title="Founder"
+                        company="StartupHub"
+                        linkedin="https://www.linkedin.com/in/lisa-anderson" %}
+                </div>
+            </div>
+            
+            <!-- Load More / Load Less Button -->
+            <div class="text-center mt-8">
+                <button id="load-more-testimonials" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+                    Load More Testimonials
+                </button>
+            </div>
+        </section>
+        
+        <script src="{{ "/assets/js/testimonials.js" | relative_url }}"></script>
+
         <!-- CTA Section -->
         <section class="bg-blue-50 rounded-lg shadow-lg p-8 text-center">
             <h2 class="text-3xl font-semibold text-gray-900 mb-4">Ready to Get Started?</h2>
