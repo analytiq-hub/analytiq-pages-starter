@@ -146,7 +146,7 @@ description: Your company description
 # Theme
 theme: analytiq-pages-theme
 
-# Navigation
+# Navigation (supports arbitrary-depth nested submenus)
 header_pages:
   - title: "Products"
     url: "#"
@@ -155,6 +155,14 @@ header_pages:
         url: "/products"
       - title: "Features"
         url: "/features"
+  # Nested submenu: item with children that have children
+  - title: "Docs"
+    url: "#"
+    children:
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
 
 # Collections
 collections:

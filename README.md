@@ -18,7 +18,7 @@ That's it! Your site will be live at `https://yourusername.github.io/repo-name/`
 ## Features
 
 - **Modern Design**: Built with Tailwind CSS for a clean, professional look
-- **Complete Navigation**: Multi-level dropdown menus and footer sitemap
+- **Complete Navigation**: Multi-level and nested (sub-sub) dropdown menus and footer sitemap
 - **Blog**: Ready-to-use blog with pagination and sample posts
 - **Documentation**: Comprehensive docs section with getting started, user guide, and API reference
 - **Case Studies**: Showcase your success stories

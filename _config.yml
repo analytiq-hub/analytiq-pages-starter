@@ -72,10 +72,13 @@ header_pages:
         url: "/docs/getting-started"
       - title: "User Guide"
         url: "/docs/user-guide"
-      - title: "API Reference"
-        url: "/docs/api-reference"
-      - title: "Architecture"
-        url: "/docs/architecture"
+      # Nested submenu (sub-sub menu): group with children
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
+          - title: "Architecture"
+            url: "/docs/architecture"
   - title: "Resources"
     url: "#"
     children:
@@ -110,10 +113,13 @@ site_map:
         url: "/docs/getting-started"
       - title: "User Guide"
         url: "/docs/user-guide"
-      - title: "API Reference"
-        url: "/docs/api-reference"
-      - title: "Architecture"
-        url: "/docs/architecture"
+      # Nested submenu (sub-sub menu) for footer - same structure as header
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
+          - title: "Architecture"
+            url: "/docs/architecture"
   - title: "Resources"
     links:
       - title: "Blog"

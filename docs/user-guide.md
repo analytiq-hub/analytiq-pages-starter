@@ -267,7 +267,7 @@ Add images to blog posts:
 
 ### Header Navigation
 
-Configure multi-level dropdown menus in `_config.yml`:
+Configure multi-level dropdown menus in `_config.yml`. The theme supports **arbitrary nesting**: any item with `children` can contain items that also have `children` (sub-sub menus).
 
 ```yaml
 header_pages:
@@ -278,6 +278,18 @@ header_pages:
         url: "/products"
       - title: "Features"
         url: "/features"
+  - title: "Docs"
+    url: "#"
+    children:
+      - title: "Getting Started"
+        url: "/docs/getting-started"
+      # Nested submenu: group with its own children
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
+          - title: "Architecture"
+            url: "/docs/architecture"
   - title: "Get Started"
     url: "/contact"
     button_style: "solid"  # Makes it a button

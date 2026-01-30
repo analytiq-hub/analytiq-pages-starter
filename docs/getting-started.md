@@ -39,7 +39,7 @@ repository: yourusername/your-repo-name
 
 ### 3. Customize Navigation
 
-Edit the `header_pages` section in `_config.yml` to customize your navigation menu:
+Edit the `header_pages` section in `_config.yml` to customize your navigation menu. You can use flat dropdowns or **nested submenus** (arbitrary depth) by giving an item `children` that themselves have `children`:
 
 ```yaml
 header_pages:
@@ -50,6 +50,18 @@ header_pages:
         url: "/products"
       - title: "Features"
         url: "/features"
+  # Nested submenu (sub-sub menu)
+  - title: "Docs"
+    url: "#"
+    children:
+      - title: "Getting Started"
+        url: "/docs/getting-started"
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
+          - title: "Architecture"
+            url: "/docs/architecture"
 ```
 
 ### 4. Add Social Media Links

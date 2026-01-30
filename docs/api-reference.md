@@ -53,10 +53,12 @@ Configure the main navigation menu:
 |-------|------|----------|-------------|
 | `title` | string | Yes | Menu item label |
 | `url` | string | Yes | URL or `"#"` for dropdown |
-| `children` | array | No | Submenu items |
+| `children` | array | No | Submenu items (links and/or nested groups) |
 | `button_style` | string | No | `"solid"` to render as button |
 
-**Example:**
+Items in `children` can be links (`title` + `url`) or nested groups (`title` + `children`). Nesting is unlimited.
+
+**Example (with nested submenu):**
 ```yaml
 header_pages:
   - title: "Products"
@@ -66,6 +68,17 @@ header_pages:
         url: "/products"
       - title: "Features"
         url: "/features"
+  - title: "Docs"
+    url: "#"
+    children:
+      - title: "Getting Started"
+        url: "/docs/getting-started"
+      - title: "Reference"
+        children:
+          - title: "API Reference"
+            url: "/docs/api-reference"
+          - title: "Architecture"
+            url: "/docs/architecture"
   - title: "Get Started"
     url: "/contact"
     button_style: "solid"
