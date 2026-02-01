@@ -99,6 +99,24 @@ header_pages:
     url: "/contact"
     button_style: "solid"
 
+# Docs floating widget (optional: theme uses this, else header_pages → Docs children)
+# Same structure as Docs children: title/url or title/children
+docs_sidebar_pages:
+  - title: "Getting Started"
+    url: "/docs/getting-started"
+  - title: "User Guide"
+    url: "/docs/user-guide"
+  - title: "Reference"
+    children:
+      - title: "API Reference"
+        url: "/docs/api-reference"
+      - title: "Architecture"
+        url: "/docs/architecture"
+
+# Docs widget heading (optional; theme default is "Documentation")
+# docs_widget:
+#   title: "Docs"
+
 # Footer sitemap - simplified navigation for footer display
 site_map:
   - title: "Products"
