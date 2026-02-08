@@ -409,3 +409,4 @@ All blog post splash images should follow this structure:
 </svg>
 ```
 
+
